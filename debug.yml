@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - ios_command:
+       commands: show arp
+       provider: "{{cli}}"
+  - debug: var=vars

@@ -1,0 +1,6 @@
+---
+cli:
+  username: vagrant
+  password: cisco
+  host: csr
+  transport: cli

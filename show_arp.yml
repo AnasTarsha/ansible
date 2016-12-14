@@ -4,4 +4,4 @@
   - ios_command:
       commands: show arp
       host:     "{{inventory_hostname}}"
-      provider: "{{cli}}"
+      provider: "{{ cli }}"

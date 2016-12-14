@@ -1,0 +1,15 @@
+---
+
+- name: verify the hostname
+  hosts: ios
+  
+  tasks:
+  - ios_command:
+      commands: show version
+      provider: "{{cli}}"
+    register: result
+    
+  - debug: var="result.stdout"
+
+  - fail: msg="host is not IOS"
+    when: "not ('Version {{version}}' in result.stdout[0])"

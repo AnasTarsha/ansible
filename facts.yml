@@ -1,0 +1,10 @@
+---
+
+- hosts: ios
+  connection: local
+  tasks:
+  - ios_facts: 
+      provider: "{{ cli }}"
+    register: facts
+  - debug: var=facts
+  - debug: var=ansible_net_version

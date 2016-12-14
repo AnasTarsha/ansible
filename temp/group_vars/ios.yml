@@ -1,4 +1,4 @@
----
+# ansible_device_os: ios
 version: "03.12.00.S"
 ansible_user: vagrant
 ansible_ssh_pass: cisco

@@ -1,0 +1,5 @@
+- hosts: ios
+  vars:
+    var1: "this, is a test"
+  roles:
+  - test_role

@@ -1,0 +1,9 @@
+---
+
+- name: check Junos facts
+  hosts: junos
+
+  tasks:
+  - junos_command: 
+      commands: "show arp" 
+      provider: "{{ netconf }}"

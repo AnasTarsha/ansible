@@ -1,0 +1,10 @@
+---
+
+- name: enable netconf service on port 830
+  hosts: junos
+  
+  tasks:
+  - junos_netconf:
+      listens_on: 830
+      state: present
+      provider: "{{ cli }}"

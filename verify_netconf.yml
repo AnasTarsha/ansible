@@ -1,0 +1,7 @@
+---
+- name: Verifying NETCONF
+  hosts: junos
+  connection: local
+  tasks: 
+    - name: Verifying NETCONF
+      wait_for: host=vsrx  port=830

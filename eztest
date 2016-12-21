@@ -1,0 +1,8 @@
+from pprint import pprint
+from jnpr.junos import Device
+dev = Device(host='vsrx', user='vagrant', password='Juniper' )
+dev.open()
+pprint( dev.facts )
+dev.close()
+
+

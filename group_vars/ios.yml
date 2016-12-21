@@ -1,10 +1,10 @@
 ---
 version: "03.12.00.S"
-ansible_user: vagrant
-ansible_ssh_pass: cisco
+username: vagrant
+password: cisco
 
 cli:
   host: "{{inventory_hostname}}"
-  username:  vagrant
-  password:  cisco
+  username:  "{{username}}"
+  password:  "{{password}}"
   transport: cli

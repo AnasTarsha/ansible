@@ -1,0 +1,12 @@
+---
+  - name: Change Hostname on a Cisco IOS router
+    hosts: ios
+   
+    tasks:
+    - ntc_config_command:
+        platform: cisco_ios_ssh
+        commands:
+          - hostname CSR
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password}}"

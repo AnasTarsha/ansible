@@ -1,2 +1,5 @@
 [ios]
 csr ansible_host=192.168.0.201
+
+[junos]
+vsrx ansible_host=192.168.0.130

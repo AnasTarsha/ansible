@@ -1,0 +1,14 @@
+username: vagrant
+password: Juniper
+
+netconf:
+   host: "{{ inventory_hostname }}"
+   username: "{{ username }}"
+   password: "{{ password }}"
+   transport: netconf
+
+cli:
+    host: "{{ inventory_hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    transport: cli

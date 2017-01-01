@@ -3,3 +3,6 @@ csr ansible_host=192.168.0.201
 
 [junos]
 vsrx ansible_host=192.168.0.130
+
+[local]
+local ansible_host=127.0.0.1 ansible_python_interpreter=python

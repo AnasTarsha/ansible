@@ -4,17 +4,44 @@
   hosts: ios
 
   tasks:
-  - ios_facts:
-       gather_subset: all
-       #commands: show ver
+  - name: Gather the ruuning version number
+    ios_facts:
+       gather_subset: hardware
        provider: "{{cli}}" 
-       host: "{{inventory_hostname}}"
-    
-  - when: ansible_net_version != "15.5(2)S"
-    ios_command:
-       commands:
-         - "reload\ny"
-       provider: "{{cli}}"
-       host: "{{inventory_hostname}}"
-    register: result
+  
+  - name: Copy the new imag to flash if it doesn't exist
+    ntc_file_copy:
+      platform: cisco_ios_ssh
+      local_file: images/{{ new_image }}
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    when: ansible_net_version != "{{version}}"
      
+  - name: Boot from the new image
+    ntc_install_os:
+      platform: cisco_ios_ssh
+      system_image_file: "{{new_image}}"
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    when: ansible_net_version != "{{version}}"
+  
+  - name: Saving configs locally
+    ntc_save_config:
+        platform: cisco_ios_ssh
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        local_file: backup/{{inventory_hostname}}.cfg
+    when: ansible_net_version != "{{version}}"
+  
+  - name: Reboot the device
+    ntc_reboot:
+      platform: cisco_ios_ssh
+      confirm: true
+      timer: 2
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    when: ansible_net_version != "{{version}}"

@@ -6,7 +6,7 @@
     - ntc_config_command:
         platform: cisco_ios_ssh
         commands:
-          - hostname CSR
+          - hostname CSR1
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password}}"

@@ -1,5 +1,5 @@
-- hosts: ios
-  vars:
-    var1: "this, is a test"
-  roles:
-  - test_role
+---
+- hosts: all
+  tasks:
+    - set_fact: mydate="{{lookup('pipe','date +%Y%m%d%H%M%S')}}"
+    - debug: var=mydate

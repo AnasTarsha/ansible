@@ -1,5 +1,6 @@
 ---
-version: "03.12.00.S"
+version: "15.5S"
+new_image: test.bin
 username: vagrant
 password: cisco
 

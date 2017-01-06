@@ -1,12 +1,12 @@
 ---
-- hosts: all
+- hosts: csr
   tasks:
   - ios_command:
       commands: show arp
       host:     "{{inventory_hostname}}"
       provider: "{{cli}}"
-    when: "'ios' in group_names" 
-  - junos_command:
-      commands: show arp
-      provider: "{{netconf}}"
-    when: "'junos' in group_names"
+    notify: test 
+  
+  handlers:
+    - name: test
+      raw: "show hostname"

@@ -1,11 +1,11 @@
 ---
 - name: Copy file to a Cisco IOS router
-  hosts: ios
+  hosts: csr
 
   tasks:
   - ntc_file_copy:
      platform: cisco_ios_ssh
-     local_file: change_hostname.yml
+     local_file: images/csr1000v-universalk9.03.12.00.S.154-2.S-std.SPA.bin
      host: "{{ inventory_hostname }}"
      username: vagrant
      password: cisco

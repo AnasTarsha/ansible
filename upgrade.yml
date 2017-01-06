@@ -1,15 +1,16 @@
 ---
 
 - name: Upgrade a Cisco IOS router
-  hosts: ios
+  hosts: csr
 
   tasks:
-  - name: Gather the ruuning version number
+  - name: GATHERING FACTS
     ios_facts:
        gather_subset: hardware
        provider: "{{cli}}" 
+    tags: always
   
-  - name: Copy the new imag to flash if it doesn't exist
+  - name: COPYING IMAGE TO DEVICE FLASH
     ntc_file_copy:
       platform: cisco_ios_ssh
       local_file: images/{{ new_image }}
@@ -17,26 +18,29 @@
       username: "{{ username }}"
       password: "{{ password }}"
     when: ansible_net_version != "{{version}}"
-     
-  - name: Boot from the new image
-    ntc_install_os:
-      platform: cisco_ios_ssh
-      system_image_file: "{{new_image}}"
-      host: "{{ inventory_hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-    when: ansible_net_version != "{{version}}"
+    tags: copy
   
-  - name: Saving configs locally
+  - name: SETTING BOOT IMAGE
+    ios_config:
+       lines:
+         - no boot system 
+         - boot system flash bootflash:{{new_image}}
+       provider: "{{cli}}"
+       host: "{{ inventory_hostname }}"
+    when: ansible_net_version != "{{version}}"
+    tags: install
+
+  - name: SAVING CONFIGS
     ntc_save_config:
         platform: cisco_ios_ssh
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password }}"
-        local_file: backup/{{inventory_hostname}}.cfg
+        local_file: backup/{{ inventory_hostname }}.cfg
     when: ansible_net_version != "{{version}}"
+    tags: backup
   
-  - name: Reboot the device
+  - name: RELOADING THE DEVICE
     ntc_reboot:
       platform: cisco_ios_ssh
       confirm: true
@@ -45,3 +49,18 @@
       username: "{{ username }}"
       password: "{{ password }}"
     when: ansible_net_version != "{{version}}"
+    tags: reload
+  
+  - name: VERIFYING CONNECTIVITY
+    wait_for:
+         port: 22
+         host: "{{inventory_hostname}}"
+         timeout: 300
+  - ios_command:
+        commands: ping 8.8.4.4
+        provider: "{{cli}}"
+        wait_for:
+        - result[0] contains "!!!"
+    register: result
+    failed_when: "not '!!!' in result.stdout[0]"
+    tags: verify

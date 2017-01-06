@@ -1,7 +1,7 @@
 ---
-version: "15.5S"
-new_image: test.bin
-username: vagrant
+version: "15.4(2)S"
+new_image: csr1000v-universalk9.03.12.00.S.154-2.S-std.SPA.bin
+username: cisco
 password: cisco
 
 cli:

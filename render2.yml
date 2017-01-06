@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  vars_files: 
-  - users.yml
-  roles:
-  - role: test_role.yml

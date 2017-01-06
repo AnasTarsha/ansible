@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  vars_files: 
-  - users.yml
-  tasks:
-  - template: src=users.j2 dest=/tmp/results.txt

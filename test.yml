@@ -1,9 +1,0 @@
----
-
-- hosts: localhost
-  connection: local
-  gather_facts: yes
-  tasks:
-    - name: print time
-      debug: var=ansible_date_time
-

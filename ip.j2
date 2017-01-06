@@ -1,5 +1,0 @@
-{% for intf in interfaces %}
-interface {{intf.name}}
- description interface {{intf.ip}}
- ip address {{intf.ip | ipaddr ('address')}} {{ intf.ip | ipaddr ('netmask')}}
-{% endfor %}

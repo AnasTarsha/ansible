@@ -1,0 +1,13 @@
+- name: check connectivity to internet
+  wait_for:
+         port: 830
+         host: "{{inventory_hostname}}"
+         timeout: 300
+
+- junos_command:
+         commands: ping 8.8.8.8 count 5
+         provider: "{{netconf}}"
+  register: result
+
+- fail: msg="ping failed"
+  when: result.stdout[0]['ping-results']['probe-results-summary']['packet-loss'] != "0"

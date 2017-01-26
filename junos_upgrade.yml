@@ -1,0 +1,17 @@
+---
+
+- name: Upgrade a Junios Device
+  hosts: junos
+ 
+  tasks:
+  - junos_facts:
+      host: "{{ inventory_hostname }}"
+      provider: "{{ netconf }}"
+  - junos_package: 
+      src: ~/ansible/images/fake_12.1X47-D10.4-domestic-signed.tgz
+      reboot: yes
+      version: "{{ package }}"     
+      provider: "{{ netconf }}"
+ 
+  - include: verify_connectivity.yml
+    when: version != "{{ package }}"

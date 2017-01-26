@@ -1,5 +1,6 @@
 username: vagrant
 password: Juniper
+package: 12.1X47-D10.4
 
 netconf:
    host: "{{ inventory_hostname }}"

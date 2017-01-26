@@ -2,5 +2,5 @@
 
 - Automate Cisco IOS Upgrades:  ios_upgrade.yml
 
-- Automate Installation and Upgrade of Software Packages on Junos Devices  junos_upgrad$
+- Automate Installation and Upgrade of Software Packages on Junos Devices  junos_upgrade.yml
 

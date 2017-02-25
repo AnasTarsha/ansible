@@ -1,5 +1,6 @@
-*.retry
+host_vars/*
 backup/*
 images/*
 *.save
 *.cfg
+*.retry

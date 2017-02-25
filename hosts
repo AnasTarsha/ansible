@@ -1,9 +1,9 @@
 [ios]
-csr ansible_host=192.168.0.201
-csr3 ansible_host=192.168.0.203
+csr
+csr3
 
 [junos]
-vsrx ansible_host=192.168.0.130
+vsrx
 
-[local]
-local ansible_host=127.0.0.1
+ecloud
+ec2

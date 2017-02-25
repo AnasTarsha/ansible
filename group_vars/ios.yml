@@ -1,8 +1,8 @@
 ---
 version: "15.4(2)S"
 new_image: csr1000v-universalk9.03.12.00.S.154-2.S-std.SPA.bin
-username: cisco
-password: cisco
+username: ansible
+password: ansible
 
 cli:
   host: "{{inventory_hostname}}"
